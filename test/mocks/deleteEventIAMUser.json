@@ -1,0 +1,66 @@
+{
+  "version": "0",
+  "id": "6b0b14d9-9f5b-66e3-6eab-48a80819f044",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.dynamodb",
+  "account": "12356789012",
+  "time": "2019-09-29T15:09:55Z",
+  "region": "eu-west-2",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.06",
+    "userIdentity": {
+      "type": "IAMUser",
+      "principalId": "AIDAJTOOFOYUBOB25GDSU",
+      "arn": "arn:aws:iam::12356789012:user/bob",
+      "accountId": "12356789012",
+      "accessKeyId": "ASITOOBOB24H56IZH4T4",
+      "userName": "bob",
+      "sessionContext": {
+        "attributes": {
+          "creationDate": "2019-09-29T11:06:37Z",
+          "mfaAuthenticated": "true"
+        }
+      },
+      "invokedBy": "signin.amazonaws.com"
+    },
+    "eventTime": "2019-09-29T15:09:55Z",
+    "eventSource": "dynamodb.amazonaws.com",
+    "eventName": "DeleteTable",
+    "awsRegion": "eu-west-2",
+    "sourceIPAddress": "74.78.11.60",
+    "userAgent": "signin.amazonaws.com",
+    "requestParameters": {
+      "tableName": "myTestingTable"
+    },
+    "responseElements": {
+      "tableDescription": {
+        "tableId": "77ea6f73-f7f3-4db6-9aa1-5ddee0f9831e",
+        "provisionedThroughput": {
+          "readCapacityUnits": 5,
+          "writeCapacityUnits": 5,
+          "numberOfDecreasesToday": 0
+        },
+        "tableName": "myTestingTable",
+        "tableSizeBytes": 0,
+        "tableStatus": "DELETING",
+        "tableArn": "arn:aws:dynamodb:eu-west-2:12356789012:table/myTestingTable",
+        "itemCount": 0
+      }
+    },
+    "requestID": "91OJ8TNHGE331E4LBLV1KCNK17VV4KQNSO5AEMVJF66Q9ASUAAJG",
+    "eventID": "4ad038ea-e91f-4ec4-b968-690e5b17e80a",
+    "readOnly": false,
+    "resources": [
+      {
+        "accountId": "12356789012",
+        "type": "AWS::DynamoDB::Table",
+        "ARN": "arn:aws:dynamodb:eu-west-2:12356789012:table/myTestingTable"
+      }
+    ],
+    "eventType": "AwsApiCall",
+    "apiVersion": "2012-08-10",
+    "managementEvent": true,
+    "recipientAccountId": "12356789012"
+  }
+}

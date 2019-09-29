@@ -1,0 +1,25 @@
+{
+  "BackupSummaries": [
+    {
+      "BackupStatus": "PENDING",
+      "BackupName": "bk1",
+      "BackupType": "User",
+      "BackupCreationDateTime": "2019-09-29T17:20:16Z",
+      "BackupSizeBytes": "216"
+    },
+    {
+      "BackupStatus": "AVAILABLE",
+      "BackupName": "bk2",
+      "BackupType": "User",
+      "BackupCreationDateTime": "2019-09-29T16:20:16Z",
+      "BackupSizeBytes": "215"
+    },
+    {
+      "BackupStatus": "AVAILABLE",
+      "BackupName": "bk3",
+      "BackupType": "User",
+      "BackupCreationDateTime": "2019-09-29T13:20:16Z",
+      "BackupSizeBytes": "214"
+    }
+  ]
+}

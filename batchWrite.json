@@ -1,0 +1,40 @@
+{
+  "myTestingTable": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "id1"
+          },
+          "text": {
+            "S": "dummy text for id1"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "id2"
+          },
+          "text": {
+            "S": "dummy text for id2"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "id3"
+          },
+          "text": {
+            "S": "dummy text for id3"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+service: dynamodbTableRestore
+frameworkVersion: ">=1.2.1 <2.0.0"
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage}
+  region: eu-west-2
+  environment:
+    TOPIC_ARN: ${self:resources.Outputs.DynamoDBTableDeleteTopic.Value}
+    SLACK_WEBHOOK_PATH: ${env:SLACK_WEBHOOK_PATH}
+package:
+  individually: true
+  exclude:
+    - test/**
+    - package.json
+    - package-lock.json
+    - batchWrite.json
+
+plugins:
+  - serverless-iam-roles-per-function
+
+functions:
+  notifyDelete:
+    handler: handlers/notifyDelete.handler
+    timeout: 10
+    events:
+     - cloudwatchEvent:
+         event:
+           source:
+             - aws.dynamodb
+           detail-type:
+             - AWS API Call via CloudTrail
+           detail:
+             eventName:
+                - DeleteTable
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - sns:Publish
+        Resource: ${self:resources.Outputs.DynamoDBTableDeleteTopic.Value}
+  notifyRestore:
+    handler: handlers/notifyRestore.handler
+    timeout: 900 # Big tables may take longer to delete.
+    events:
+     - cloudwatchEvent:
+         event:
+           source:
+             - aws.dynamodb
+           detail-type:
+             - AWS API Call via CloudTrail
+           detail:
+             eventName:
+                - DeleteTable
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - sns:Publish
+        Resource: ${self:resources.Outputs.DynamoDBTableDeleteTopic.Value}
+      - Effect: Allow
+        Action: # Minimum permissions required for waitFor and restoreTableFromBackup.
+          - dynamodb:ListBackups
+          - dynamodb:RestoreTableFromBackup
+          - dynamodb:Scan
+          - dynamodb:Query
+          - dynamodb:UpdateItem
+          - dynamodb:PutItem
+          - dynamodb:GetItem
+          - dynamodb:DeleteItem
+          - dynamodb:BatchWriteItem
+          - dynamodb:DescribeTable
+        Resource: '*'
+resources:
+  Resources:
+    DynamoDBTableDeleteTopic:
+        Type: AWS::SNS::Topic
+        Properties:
+          DisplayName: DynamoDB table deletion notification
+          TopicName: DynamoDBTableDelete
+    DynamoDBTableDeleteEmailSub:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Endpoint: ${env:DYNAMODB_TOPIC_EMAIL}
+        Protocol: email
+        TopicArn: !Ref DynamoDBTableDeleteTopic
+    MyTestingTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Delete # Retain is usually the good option but for clean up added 'Delete'.
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: myTestingTable
+  Outputs:
+    DynamoDBTableDeleteTopic:
+      Value:
+        Ref: DynamoDBTableDeleteTopic

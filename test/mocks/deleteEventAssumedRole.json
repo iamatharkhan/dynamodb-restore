@@ -1,0 +1,79 @@
+{
+  "version": "0",
+  "id": "c6b6cbbd-a6be-f083-5159-e8fd2d36e8e8",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.dynamodb",
+  "account": "12356789012",
+  "time": "2019-09-29T17:24:19Z",
+  "region": "eu-west-2",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.06",
+    "userIdentity": {
+      "type": "AssumedRole",
+      "principalId": "AROAJRGF6BOB123JJSDBKI:bob",
+      "arn": "arn:aws:sts::12356789012:assumed-role/Developer/bob",
+      "accountId": "12356789012",
+      "accessKeyId": "ASIAR3LRI54HUIKCZO6W",
+      "sessionContext": {
+        "sessionIssuer": {
+          "type": "Role",
+          "principalId": "AROAJRGFBOB123IJJSDBKI",
+          "arn": "arn:aws:iam::12356789012:role/Developer",
+          "accountId": "12356789012",
+          "userName": "Developer"
+        },
+        "attributes": {
+          "creationDate": "2019-09-29T17:20:16Z",
+          "mfaAuthenticated": "true"
+        }
+      }
+    },
+    "eventTime": "2019-09-29T17:24:19Z",
+    "eventSource": "dynamodb.amazonaws.com",
+    "eventName": "DeleteTable",
+    "awsRegion": "eu-west-2",
+    "sourceIPAddress": "84.68.21.70",
+    "userAgent": "console.amazonaws.com",
+    "requestParameters": {
+      "tableName": "myTestingTable"
+    },
+    "responseElements": {
+      "tableDescription": {
+        "tableId": "d56494a2-2133-4733-af51-83dc7b3919ff",
+        "provisionedThroughput": {
+          "readCapacityUnits": 0,
+          "writeCapacityUnits": 0,
+          "numberOfDecreasesToday": 0
+        },
+        "tableName": "myTestingTable",
+        "billingModeSummary": {
+          "billingMode": "PAY_PER_REQUEST",
+          "lastUpdateToPayPerRequestDateTime": "Sep 29, 2019 5:21:44 PM"
+        },
+        "tableSizeBytes": 0,
+        "tableStatus": "DELETING",
+        "tableThroughputModeSummary": {
+          "tableThroughputMode": "PAY_PER_REQUEST",
+          "lastUpdateToPayPerRequestDateTime": "Sep 29, 2019 5:21:44 PM"
+        },
+        "tableArn": "arn:aws:dynamodb:eu-west-2:12356789012:table/myTestingTable",
+        "itemCount": 0
+      }
+    },
+    "requestID": "UJPDTUD9U5ALI8B7JV1K9LVQTBVV4KQNSO5AEMVJF66Q9ASUAAJG",
+    "eventID": "7f9128ba-0d9f-40c5-a892-3631dbc17090",
+    "readOnly": false,
+    "resources": [
+      {
+        "accountId": "12356789012",
+        "type": "AWS::DynamoDB::Table",
+        "ARN": "arn:aws:dynamodb:eu-west-2:12356789012:table/myTestingTable"
+      }
+    ],
+    "eventType": "AwsApiCall",
+    "apiVersion": "2012-08-10",
+    "managementEvent": true,
+    "recipientAccountId": "12356789012"
+  }
+}
