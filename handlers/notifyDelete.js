@@ -1,13 +1,15 @@
 'use strict';
 
 const SNS = require('aws-sdk/clients/sns');
+// Lock API version.
 const sns = new SNS({
   apiVersion: '2010-03-31'
 });
 
 const https = require('https');
+
 /**
- * Posting data to Slack webhook integration endpoint.
+ * Post data to Slack webhook integration endpoint.
  *
  * @param {string} data
  * @returns
@@ -39,6 +41,7 @@ module.exports.handler = async (event) => {
 
     const isAssumedRole = event.detail.userIdentity.type === 'AssumedRole';
 
+    // Notification message.
     const eventDetails = JSON.stringify({
       tableName: event.detail.requestParameters.tableName,
       deletionTime: event.detail.eventTime,

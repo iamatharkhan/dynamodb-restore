@@ -1,7 +1,7 @@
 {
   "name": "dynamodb-restore",
   "version": "0.0.1",
-  "description": "Detect Dynamodb table delete and restore it from one of the available backup",
+  "description": "Detect Dynamodb table delete and restore it from one of the available backups",
   "scripts": {
     "test": "nyc mocha",
     "deploy": "serverless deploy --stage dev",

@@ -15,7 +15,7 @@ const ddb = new DynamoDB({
 const https = require('https');
 
 /**
- * Posting data to Slack webhook integration endpoint.
+ * Post data to Slack webhook integration endpoint.
  *
  * @param {string} data
  * @returns
@@ -48,6 +48,7 @@ module.exports.handler = async (event) => {
     // Notification message to be attached.
     let eventDetails;
 
+    // Find the backups for the table.
     const backups = await ddb.listBackups({
       TableName: event.detail.requestParameters.tableName,
       Limit: 10,
@@ -77,7 +78,7 @@ module.exports.handler = async (event) => {
     }
 
     // Send out notifications.
-    // Don't await here, carry on doing restoration tasks.
+    // Don't `await` here, carry on doing restoration tasks.
     const notificationSent = Promise.all([
       // SNS topic.
       sns.publish({

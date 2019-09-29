@@ -57,7 +57,7 @@ functions:
           - sns:Publish
         Resource: ${self:resources.Outputs.DynamoDBTableDeleteTopic.Value}
       - Effect: Allow
-        Action: # Minimum permissions required for waitFor and restoreTableFromBackup.
+        Action: # Minimum permissions required for `waitFor` and `restoreTableFromBackup`.
           - dynamodb:ListBackups
           - dynamodb:RestoreTableFromBackup
           - dynamodb:Scan
@@ -71,17 +71,20 @@ functions:
         Resource: '*'
 resources:
   Resources:
+    # SNS Topic.
     DynamoDBTableDeleteTopic:
         Type: AWS::SNS::Topic
         Properties:
           DisplayName: DynamoDB table deletion notification
           TopicName: DynamoDBTableDelete
+    # SNS Topic Subscription.
     DynamoDBTableDeleteEmailSub:
       Type: AWS::SNS::Subscription
       Properties:
         Endpoint: ${env:DYNAMODB_TOPIC_EMAIL}
         Protocol: email
         TopicArn: !Ref DynamoDBTableDeleteTopic
+    # DynamoDB Table.
     MyTestingTable:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Delete # Retain is usually the good option but for clean up added 'Delete'.
