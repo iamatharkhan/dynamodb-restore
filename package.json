@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "aws-sdk": "^2.538.0",
+    "aws-sdk": "^2.814.0",
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "nock": "^11.3.5",
